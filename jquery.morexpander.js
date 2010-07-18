@@ -16,13 +16,14 @@
             if (!$(link).parent().prev().is('.more-container')) {
                 $moreContainer = $('<div>').attr('class', 'more-container');
                 var $linkContainer = $(link).parent();
+                $(link).text(options['loadingLabel']);
                 $moreContainer.load($(link).attr('href') + ' .main-content', function(data) {
                     $moreContainer.hide();
                     $linkContainer.before($moreContainer);
                     $moreContainer.css('opacity', 0).slideDown(options['transitionDuration']).animate({'opacity': 1}, options['transitionDuration']);
                     $(link).data('running',false);
+                    $(link).text(options['lessLabel']);
                 });
-                $(link).text(options['lessLabel']);
             } else {
                 $moreContainer = $(link).parent().prev('.more-container');
                 $moreContainer.animate({'opacity': 0}, options['transitionDuration']).slideUp(options['transitionDuration'], function() {
@@ -38,7 +39,8 @@
         'defaults': {
             'transitionDuration': 250,
             'moreLabel': gettext('more …'),
-            'lessLabel': gettext('less …')
+            'lessLabel': gettext('less …'),
+            'loadingLabel': gettext('loading …')
         }
     };
 })(jQuery);
