@@ -1,4 +1,8 @@
 (function($) {
+    if (typeof(gettext) == 'undefined') {
+        gettext = function(s) { return s; };
+    }
+    
     $.fn.morexpander = function(options) {
         options = $.extend({}, $.morexpander.defaults, options);
         $(this).bind('click', function(e) {
@@ -33,8 +37,8 @@
     $.morexpander = {
         'defaults': {
             'transitionDuration': 250,
-            'moreLabel': 'mehr …',
-            'lessLabel': 'weniger …'
+            'moreLabel': gettext('more …'),
+            'lessLabel': gettext('less …')
         }
     };
 })(jQuery);
